@@ -1,0 +1,84 @@
+info:
+  contact: {}
+paths:
+  /api/videos/download/{name}:
+    get:
+      description: 下载视频
+      parameters:
+      - description: 视频文件名
+        in: query
+        name: name
+        required: true
+        type: string
+      produces:
+      - multipart/form-data
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: '{"code":"404","msg":"视频文件不存在"}'
+          schema:
+            type: string
+      summary: 下载视频
+      tags:
+      - Videos
+  /api/videos/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 上传视频
+      parameters:
+      - description: 上传文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: "00:00:00"
+        in: query
+        name: start_time
+        required: true
+        type: string
+      - description: "00:00:00"
+        in: query
+        name: end_time
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":"200","msg":"上传成功"}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg":"上传失败"}'
+          schema:
+            type: string
+      summary: 上传视频
+      tags:
+      - Videos
+  /videos-list:
+    get:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: 上传文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":"200","msg":"上传成功"}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg":"上传失败"}'
+          schema:
+            type: string
+      summary: 视频输入
+      tags:
+      - 公共方法
+swagger: "2.0"
